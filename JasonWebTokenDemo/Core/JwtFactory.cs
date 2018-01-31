@@ -5,12 +5,11 @@ using System.Security.Principal;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using JasonWebTokenDemo.Core;
 using JasonWebTokenDemo.Helpers;
 using JasonWebTokenDemo.Models;
 using JasonWebTokenDemo.Options;
 
-namespace JasonWebTokenDemo.Auth
+namespace JasonWebTokenDemo.Core
 {
     public class JwtFactory : IJwtFactory
     {
@@ -46,13 +45,10 @@ namespace JasonWebTokenDemo.Auth
 
         private async Task<string> EncodeTokenAsync(IdentityUser user)
         {
-            // 要重新設定 JWT 的簽發時間，否則永遠只會取得本專案啟動時所注入的當下時間
-            _jwtOptions.IssuedAt = DateTime.UtcNow;
-
             //  Token 可以存放用戶的一些基本資料
             var identity = new ClaimsIdentity(new GenericIdentity(user.UserName, "Token"), new[]
             {
-                new Claim(Constants.Strings.JwtClaimIdentifiers.Id, user.Id.ToString()),
+                new Claim(Constants.Strings.JwtClaimIdentifiers.UserId, user.Id.ToString()),
                 new Claim(Constants.Strings.JwtClaimIdentifiers.UserName, user.UserName),
                 new Claim(Constants.Strings.JwtClaimIdentifiers.Email, user.Email),
                 new Claim(Constants.Strings.JwtClaimIdentifiers.Rol, Constants.Strings.JwtClaims.ApiAccess)
@@ -63,7 +59,7 @@ namespace JasonWebTokenDemo.Auth
                  new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
                  new Claim(JwtRegisteredClaimNames.Jti, await _jwtOptions.JtiGenerator()),
                  new Claim(JwtRegisteredClaimNames.Iat, DateTimeHelper.ConvertToUnixTimeSeconds(_jwtOptions.IssuedAt).ToString(), ClaimValueTypes.Integer64),
-                 identity.FindFirst(Constants.Strings.JwtClaimIdentifiers.Id),
+                 identity.FindFirst(Constants.Strings.JwtClaimIdentifiers.UserId),
                  identity.FindFirst(Constants.Strings.JwtClaimIdentifiers.UserName),
                  identity.FindFirst(Constants.Strings.JwtClaimIdentifiers.Email),
                  identity.FindFirst(Constants.Strings.JwtClaimIdentifiers.Rol)

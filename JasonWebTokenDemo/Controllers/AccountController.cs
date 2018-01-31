@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using JasonWebTokenDemo.Models;
-using JasonWebTokenDemo.Auth;
+using JasonWebTokenDemo.Core;
 
 namespace JasonWebTokenDemo.Controllers
 {
@@ -37,7 +37,7 @@ namespace JasonWebTokenDemo.Controllers
                 // 帳密驗證成功，從資料庫取得該用戶的會員資料
                 var user = new IdentityUser()
                 {
-                    Id = Guid.Parse("65304615-2D0C-4D61-B9A1-115F4FB60372"),
+                    Id = Guid.NewGuid(),
                     Email = "superman@mymail.com",
                     UserName = "Superman"
                 };

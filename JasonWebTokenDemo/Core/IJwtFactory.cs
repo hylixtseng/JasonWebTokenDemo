@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using JasonWebTokenDemo.Models;
 
-namespace JasonWebTokenDemo.Auth
+namespace JasonWebTokenDemo.Core
 {
     public interface IJwtFactory
     {

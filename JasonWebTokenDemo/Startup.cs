@@ -12,7 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using JasonWebTokenDemo.Auth;
+using JasonWebTokenDemo.Core;
 using JasonWebTokenDemo.Options;
 
 namespace JasonWebTokenDemo

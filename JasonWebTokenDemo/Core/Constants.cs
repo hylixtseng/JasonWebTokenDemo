@@ -14,7 +14,7 @@ namespace JasonWebTokenDemo.Core
             /// </summary>
             public static class JwtClaimIdentifiers
             {
-                public const string Id = "id";
+                public const string UserId = "uid";
                 public const string UserName = "uname";
                 public const string Email = "email";
                 public const string Rol = "rol";
