@@ -50,7 +50,7 @@ namespace JasonWebTokenDemo.Options
         ///   issued.  This claim can be used to determine the age of the JWT.  Its
         ///   value MUST be a number containing a NumericDate value.  Use of this
         ///   claim is OPTIONAL.</remarks>
-        public DateTime IssuedAt => DateTime.UtcNow;
+        public DateTime IssuedAt { get; set; } = DateTime.UtcNow;
 
         /// <summary>
         /// "nbf" (Not Before) 代表這個 JWT 生效的開始時間。
