@@ -35,7 +35,6 @@ namespace JasonWebTokenDemo.Auth
                 {
                     Account = user.UserName,
                     Email = user.Email,
-                    Gender = user.Gender,
                     Id = user.Id
                 },
                 AccessToken = await this.EncodeTokenAsync(user),
@@ -153,11 +152,6 @@ namespace JasonWebTokenDemo.Auth
                 /// 電子信箱
                 /// </summary>
                 public string Email { get; set; }
-
-                /// <summary>
-                /// 性別
-                /// </summary>
-                public string Gender { get; set; }
             }
         }
     }

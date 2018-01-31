@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using JasonWebTokenDemo.Auth;
 using JasonWebTokenDemo.Options;
 
 namespace JasonWebTokenDemo
@@ -26,6 +27,7 @@ namespace JasonWebTokenDemo
         {
             Configuration = configuration;
             
+            // 取得 JWT 的密鑰
             _signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration["SecretKey:SymmetricSecurityKey"]));
         }
 
@@ -37,6 +39,9 @@ namespace JasonWebTokenDemo
 
             // JwtFactory 類別需要注入 IOptions<JwtIssuerOptions>，這裡設定 JwtIssuerOptions 的初始值
             ConfigureJwtIssuerOptions(services);
+
+            // Register JwtFactory
+            services.AddScoped<IJwtFactory, JwtFactory>();
 
             services.AddMvc(config =>
             {
