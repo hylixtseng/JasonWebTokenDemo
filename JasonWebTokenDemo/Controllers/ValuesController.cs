@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Authorization;
 namespace JasonWebTokenDemo.Controllers
 {
     [Route("api/[controller]")]
-    [AllowAnonymous]
     public class ValuesController : Controller
     {
         // GET api/values

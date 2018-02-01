@@ -50,5 +50,21 @@ namespace JasonWebTokenDemo.Controllers
 
             return BadRequest("帳號或密碼輸入錯誤，請重新登入。");
         }
+
+        /// <summary>
+        /// 取得會員個人資訊
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> GetUserInfo()
+        {
+            var user = new
+            {
+                Email = "superman@mymail.com",
+                UserName = "Superman"
+            };
+
+            return Ok(user);
+        }
     }
 }
