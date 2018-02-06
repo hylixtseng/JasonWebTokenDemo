@@ -106,6 +106,9 @@ namespace JasonWebTokenDemo.Core
             }
         }
 
+        /// <summary>
+        /// 要傳送到前端的 JWT 格式，User 屬性視需求帶入，其他則為必要回傳的屬性
+        /// </summary>
         public class JwtView
         {
             /// <summary>

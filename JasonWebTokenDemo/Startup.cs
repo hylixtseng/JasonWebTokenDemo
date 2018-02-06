@@ -113,6 +113,9 @@ namespace JasonWebTokenDemo
                 RequireExpirationTime = true,
                 ValidateLifetime = true,
 
+                // 設定這個屬性，User.Identity.Name 才會有值，這裡也可以指定其他 Claim Type
+                NameClaimType = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier",
+
                 ClockSkew = TimeSpan.Zero
             };
             

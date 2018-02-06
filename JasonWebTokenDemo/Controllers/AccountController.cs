@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using JasonWebTokenDemo.Extensions;
 using JasonWebTokenDemo.Models;
 using JasonWebTokenDemo.Core;
 
@@ -23,6 +24,7 @@ namespace JasonWebTokenDemo.Controllers
 
         /// <summary>
         /// 會員登入，登入成功即發送 JWT
+        /// POST http://localhost:3000/api/Account/Login
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
@@ -52,16 +54,29 @@ namespace JasonWebTokenDemo.Controllers
         }
 
         /// <summary>
-        /// 取得會員個人資訊
+        /// 本 API 需要通過驗證才可以取得會員個人資訊
+        /// GET http://localhost:3000/api/Account
         /// </summary>
         /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> GetUserInfo()
         {
+            if (this.User.Identity.IsAuthenticated)
+            {
+                // 程式能夠跑到 Action 內表示 Token 已經驗證成功，所以通常不需要再用 IsAuthenticated 屬性去判斷是否驗證成功
+                var name = this.User.Identity.Name;
+            }
+
+            // 因為我們有在 JWT 塞一些會員個人資料，所以可以透過以下擴充方法取得這些資料
+            var userId = this.User.GetUserId();
+            var userName = this.User.GetUserName();
+            var email = this.User.GetEmail();
+            
             var user = new
             {
-                Email = "superman@mymail.com",
-                UserName = "Superman"
+                UserId = userId,
+                UserName = userName,
+                Email = email
             };
 
             return Ok(user);
